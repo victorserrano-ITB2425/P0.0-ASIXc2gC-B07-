@@ -39,8 +39,9 @@ network:
 
 Primero, comprobamos la configuración de red ejecutando:
 
-<button onclick="navigator.clipboard.writeText('sudo netplan try')">Copiar</button>
-
+```bash
+sudo netplan try
+```
 
 Si todo es correcto, aplicamos los cambios:
 
@@ -55,10 +56,18 @@ sudo netplan apply
 Configuramos el **hostname** del sistema con:
 
 ```bash
-sudo hostnamectl set-hostname <nuevo_hostname>
+sudo hostnamectl set-hostname B-N07
 ```
 
 Luego, actualizamos el archivo `/etc/hosts` para que el sistema reconozca el nuevo nombre del host.
+```bash
+sudo nano /etc/hosts
+```
+Tendriamos que tener algo asi:
+```bash
+127.0.0.1 localhost
+127.0.1.1 B-N07
+```
 
 ---
 
@@ -108,6 +117,11 @@ Reiniciamos el servicio SSH para aplicar los cambios:
 ```bash
 sudo systemctl restart ssh
 ```
+Comprobamos el estado del ssh
+```bash
+sudo systemctl status ssh
+```
+
 
 ---
 
@@ -116,7 +130,39 @@ sudo systemctl restart ssh
 Finalmente, comprobamos la conexión accediendo desde otro equipo o router:
 
 ```bash
-ssh bchecker@<ip_del_servidor>
+ssh bchecker@192.168.7.11
+```
+
+Desde el otro equipo nos deve aparecer esto:
+```bash
+isard@R-N07:~$ ssh bchecker@192.168.7.11
+The authenticity of host '192.168.7.11 (192.168.7.11)' can't be established.
+ED25519 key fingerprint is SHA256:IP3d7VGhqa1/1N6jLfFMJaUL9jwki+MYqxzLz67moiw.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.7.11' (ED25519) to the list of known hosts.
+bchecker@192.168.7.11's password:
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-160-generic x86_64)
+
+* Documentation:  https://help.ubuntu.com
+* Management:     https://landscape.canonical.com
+* Support:        https://ubuntu.com/pro
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+bchecker@B-N07:~$
 ```
 
 ---
