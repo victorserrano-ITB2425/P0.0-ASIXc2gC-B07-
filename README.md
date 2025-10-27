@@ -164,6 +164,11 @@ See "man sudo_root" for details.
 
 bchecker@B-N07:~$
 ```
-2 redes
+## 2. Documentación del servidor de base de datos
+### 2.1 Configuración del host y hostname
+Editamos el archivo de hosts:
+```bash
+sudo nano /etc/hosts
+```
 ---
 
