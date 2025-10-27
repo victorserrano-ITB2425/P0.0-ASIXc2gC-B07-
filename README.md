@@ -182,7 +182,7 @@ Tendriamos que tener algo asi:
 ### 2.2 Configuramos el Netplan
 Entramos al archivo de netplan:
 ```bash
-sudo nano /etc/netplan/00-installer-config.yaml
+sudo nano /etc/netplan/00-installer-config.yaml 
 ```
 Configuracion del  netplan
 ```bash
