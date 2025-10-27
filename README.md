@@ -294,9 +294,9 @@ host F-N07 {
     fixed-address 192.168.17.12;
 }
 ```
-### 1.4 Creación del usuario bchecker
+### 2.6 Creación del usuario bchecker
 
-Creamos el usuario `bchecker` con la contraseña `bchecker121` para permitir el acceso seguro mediante SSH:
+Creamos otro  usuario `bchecker` en el servidor del router con la contraseña `bchecker121` para permitir el acceso seguro mediante SSH:
 
 ```bash
 sudo adduser bchecker
