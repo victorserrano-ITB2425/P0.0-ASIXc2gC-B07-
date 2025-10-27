@@ -243,7 +243,7 @@ Instalamos el DHCP con el siguiente comando:
 sudo apt install isc-dhcp-server
 ```
 ### 2.5 Configuracion del DHCP
-Entramos al archivo de configuracion:
+Entramos al archivo de configuracion de interfaces de red:
 ```bash
 sudo nano /etc/default/isc-dhcp-server
 ```
@@ -252,8 +252,48 @@ Al entrar buscaremos la linea de las interfaces y le indicamos al servidor DHCP 
 INTERFACESv4="enp3s0 enp4s0"
 INTERFACESv6=""
 ```
+Entramos el fichero  de configuracion de DHCP:
+```bash
+sudo nano /etc/dhcp/dhcpd.conf
+```
+Al entrar al archivo de configuracion de DHCP añadimos el rango de Ips:
+```bash
+#Subnet 7.1 Intranet
+subnet 192.168.7.0 netmask 255.255.255.0 {
+  range 192.168.7.10 192.168.7.100;
+  option routers 192.168.7.1;
+  option subnet-mask 255.255.255.255.0
+  option domain-name-servers 192.168.17.1;
+}
+#Subnet 17.0.DMZ
+subnet 192.168.17.0 netmask 255.255.255.0 {
+  range 12.168.17.10.192.168.17.100;
+  option routes 192.168.17.1;
+  option subnet-mask 255.255.255.0;
+  option domain-name-servers 192.168.17.1
+}
+```
+En el mismo fichero de configuracion de DHCP colocamos una ip fija a los servidores,mediantes la direccion MAC:
+```bash
+#Intranet 7.1
+#Intranet 7.1
+host B-N07 {
+    hardware ethernet 52:54:00:07:6c:7c;
+    fixed-address 192.168.7.11;
+}
 
+#DMZ 17.1
+host W-N07 {
+    hardware ethernet 52:54:00:09:44:86;
+    fixed-address 192.168.17.11;
+}
 
+#F-N07
+host F-N07 {
+    hardware ethernet 52:54:00:34:5e:8b;
+    fixed-address 192.168.17.12;
+}
+```
 
 ---
 
