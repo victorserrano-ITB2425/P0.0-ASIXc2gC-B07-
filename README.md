@@ -27,15 +27,9 @@ network:
     enp1s0:
       dhcp4: true
     enp3s0:
-      dhcp4: false
-      addresses:
-        - 192.168.7.11/24
-      gateway4: 192.168.7.1 # IP estática del router R-N07
-      nameservers:
-        addresses: [192.168.1.1] # IP del servidor DNS R-N07
+      dhcp4: true # la ip la tendremos mediante el Router
   version: 2
 ```
-
 
 Primero, comprobamos la configuración de red ejecutando:
 
@@ -47,6 +41,42 @@ Si todo es correcto, aplicamos los cambios:
 
 ```bash
 sudo netplan apply
+```
+Pedimos la ip al R-N07:
+```bash
+sudo dhclient -v
+```
+Resultado:
+
+```bash
+Internet Systems Consortium DHCP Client 4.4.1
+Copyright 2004-2018 Internet Systems Consortium.
+All rights reserved.
+For info, please visit https://www.isc.org/software/dhcp/
+
+Listening on LPF/enp3s0/52:54:00:07:6a:7c
+Sending on   LPF/enp3s0/52:54:00:07:6a:7c
+Listening on LPF/enp2s0/52:54:00:4b:44:2a
+Sending on   LPF/enp2s0/52:54:00:4b:44:2a
+Listening on LPF/enp1s0/52:54:00:2d:54:24
+Sending on   LPF/enp1s0/52:54:00:2d:54:24
+Sending on   Socket/fallback
+DHCPDISCOVER on enp3s0 to 255.255.255.255 port 67 interval 3 (xid=0x381aa044)
+DHCPDISCOVER on enp2s0 to 255.255.255.255 port 67 interval 3 (xid=0xd7f73f39)
+DHCPDISCOVER on enp1s0 to 255.255.255.255 port 67 interval 3 (xid=0x2cad3735)
+DHCPOFFER of 192.168.7.12 from 192.168.7.1
+DHCPREQUEST for 192.168.7.12 on enp3s0 to 255.255.255.255 port 67 (xid=0x44a01a38)
+DHCPACK of 192.168.7.12 from 192.168.7.1 (xid=0x381aa044)
+bound to 192.168.7.12 -- renewal in 250 seconds.
+```
+Revisamos la ip del servidor B-N07:
+```bash
+isard@B-N07:~$ ip a | grep enp3s0
+```
+Resultado esperado:
+```bash
+4: enp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    inet 192.168.7.12/24 brd 192.168.7.255 scope global dynamic enp3s0
 ```
 
 ---
