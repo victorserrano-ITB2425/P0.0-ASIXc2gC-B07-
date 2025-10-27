@@ -164,11 +164,66 @@ See "man sudo_root" for details.
 
 bchecker@B-N07:~$
 ```
-## 2. Documentación del servidor de base de datos
+## 2. red
 ### 2.1 Configuración del host y hostname
-Editamos el archivo de hosts:
+Configuramos el archivo de hostname: 
+```bash
+sudo hostnamectl set-hostname R-N07
+```
+Tambien editamos el archivo de hosts:
 ```bash
 sudo nano /etc/hosts
 ```
+Tendriamos que tener algo asi:
+```bash
+127.0.0.1 localhost
+127.0.1.1 hostname
+```
+### 2.2 Configuramos el Netplan
+Entramos al archivo de netplan:
+```bash
+sudo nano /etc/netplan/00-installer-config.yaml
+```
+Configuracion del  netplan
+```bash
+network:
+  version. 2
+  ethernets:
+     enp1s0:
+       dhcp4: true #nat
+      enp3s0:
+        addresses:
+          - 192.1668.7.1/24 #Intranet B-N07
+      enp4s0:
+        addresses:
+          - 192.168.17.1/24 #DMZ
+```
+Aplicamos los cambios:
+```bash
+sudo netplan apply
+```
+### 2.3Configuracion del firewall
+Configuramos el firewall para que nuestra red interna compata una unica direccion IP publica al acceder a internet
+```bash
+sudo iptables -t nat -A POSTROUTING -o enp1s0 -j MASQUERADE
+```
+### 2.4 Instalación del DHCP
+Instalamos el DHCP con el siguiente comando:
+```bash
+sudo apt install isc-dhcp-server
+```
+### 2.5 Configuracion del DHCP
+Entramos al archivo de configuracion:
+```bash
+sudo nano /etc/default/isc-dhcp-server
+```
+Al entrar buscaremos la linea de las interfaces y le indicamos al servidor DHCP exactamente en que interfaces queremos el DHCP
+```bash
+INTERFACESv4="enp3s0 enp4s0"
+INTERFACESv6=""
+```
+
+
+
 ---
 
