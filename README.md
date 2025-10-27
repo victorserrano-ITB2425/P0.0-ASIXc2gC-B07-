@@ -194,7 +194,7 @@ See "man sudo_root" for details.
 
 bchecker@B-N07:~$
 ```
-## 2. red
+## 2. Documentacion de la configuracion del router
 ### 2.1 Configuración del host y hostname
 Configuramos el archivo de hostname: 
 ```bash
@@ -252,6 +252,10 @@ Al entrar buscaremos la linea de las interfaces y le indicamos al servidor DHCP 
 INTERFACESv4="enp3s0 enp4s0"
 INTERFACESv6=""
 ```
+
+
+
+---
 
 
 
