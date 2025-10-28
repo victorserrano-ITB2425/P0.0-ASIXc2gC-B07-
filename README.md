@@ -309,3 +309,146 @@ Le damos privilegios de **sudo**:
 sudo usermod -aG sudo bchecker
 ```
 
+## 3. Documentación de apache 2
+
+### 3.1 Actualización del servidor e instalación de apache
+Actualizamos el servidor
+```bash
+sudo apt update
+sudo apt upgrade -y
+```
+
+Instalamos el servicio de apache 
+```bash
+sudo apt install apache2 -y
+```
+
+Verificamos que esta activado
+```bash
+sudo systemctl status apache2
+```
+
+### 3.2 Configuración del Netplan
+Editamos el archivo de configuración de red:
+```bash
+sudo nano /etc/netplan/00-installer-config.yaml
+```
+
+Configuracion del netplan:
+```bash
+network:
+  ethernets:
+    enp1s0:
+      dhcp4: true
+    enp3s0:
+      dhcp4: true # la ip la tendremos mediante el Router
+  version: 2
+```
+
+Primero, comprobamos la configuración de red ejecutando:
+
+```bash
+sudo netplan try
+```
+
+Si todo es correcto, aplicamos los cambios:
+
+```bash
+sudo netplan apply
+```
+Ahora ya tenemos una IP asignada por el router mediante dhcp (ver con ip a)
+
+### 3.3 Creación del usuario bchecker
+
+Creamos otro  usuario `bchecker` con la contraseña `bchecker121` para permitir el acceso seguro mediante SSH:
+
+```bash
+sudo adduser bchecker
+sudo passwd bchecker
+```
+### 3.4 Cambiamos el host y hostname
+
+Vamos a
+```bash
+sudo nano /etc/hosts
+sudo nano /etc/hostname
+```
+y ahi cambiamos el nombre de ubuntu por W-N07
+
+## 4. Documentación de ftpserver
+
+### 4.1 Instalacion de servicio FTP
+El servicio se instala con los siguientes comandos
+```bash
+sudo apt update
+sudo apt install vsftpd -y
+```
+
+Vemos que el servicio funciona con
+```bash
+sudo systemctl status vsftpd
+```
+### 4.2 Configuración FTP
+Vamos a cambiar los parametros 
+"anonymous_enable=NO
+local_enable=YES
+write_enable=YES
+chroot_local_user=YES"
+que se encuentran en 
+```bash
+sudo nano /etc/vsftpd.conf
+```
+y reiniciamos el servicio para aplicar los cambios
+```bash
+sudo systemctl restart vsftpd
+```
+
+### 4.3 Configuración del Netplan
+Editamos el archivo de configuración de red:
+```bash
+sudo nano /etc/netplan/00-installer-config.yaml
+```
+
+Configuracion del netplan:
+```bash
+network:
+  ethernets:
+    enp1s0:
+      dhcp4: true
+    enp3s0:
+      dhcp4: true # la ip la tendremos mediante el Router
+  version: 2
+```
+
+Primero, comprobamos la configuración de red ejecutando:
+
+```bash
+sudo netplan try
+```
+
+Si todo es correcto, aplicamos los cambios:
+
+```bash
+sudo netplan apply
+```
+Ahora ya tenemos una IP asignada por el router mediante dhcp (ver con ip a)
+
+### 4.4 Creación del usuario bchecker
+
+Creamos otro  usuario `bchecker`con la contraseña `bchecker121` para permitir el acceso seguro mediante SSH:
+
+```bash
+sudo adduser bchecker
+sudo passwd bchecker
+```
+### 3.4 Cambiamos el host y hostname
+
+Vamos a
+```bash
+sudo nano /etc/hosts
+sudo nano /etc/hostname
+```
+y ahi cambiamos el nombre de ubuntu por F-N07
+
+
+
