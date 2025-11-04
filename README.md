@@ -441,7 +441,7 @@ Creamos otro  usuario `bchecker`con la contraseña `bchecker121` para permitir e
 sudo adduser bchecker
 sudo passwd bchecker
 ```
-### 3.4 Cambiamos el host y hostname
+### 4.5 Cambiamos el host y hostname
 
 Vamos a
 ```bash
