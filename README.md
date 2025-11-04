@@ -448,7 +448,12 @@ Vamos a
 sudo nano /etc/hosts
 sudo nano /etc/hostname
 ```
-y ahi cambiamos el nombre de ubuntu por F-N07
+### 5 Configuracion de los clientes
+Le configuramos las ip de forma estatica 
+```bash
+sudo nano /etc/hosts
+sudo nano /etc/hostname
+```
 
 
 
