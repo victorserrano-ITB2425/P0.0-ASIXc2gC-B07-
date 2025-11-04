@@ -10,6 +10,17 @@
   - [1.4 Creación del usuario bchecker](#14-creación-del-usuario-bchecker)
   - [1.5 Configuración de SSH](#15-configuración-de-ssh)
   - [1.6 Conexión SSH desde el router](#16-conexión-ssh-desde-el-router)
+- [3. Documentación de apache 2](#3-documentacion-de-apache-2)
+  - [3.1 Actualización del servidor e instalación de apache](#31-Actualizacion-del-servidor-e-instalación-de-apache)
+  - [3.2 Configuración del Netplan](#32-Configuracion-del-netplan)
+  - [3.3 Creación del usuario bchecker](#33-creacion-del-usuario-bchecker)
+  - [3.4 Cambiamos el host y hostname](#34-cambiamos-el-host-y-hostname)
+- [4. Documentación de ftpserver](#4-documentacion-de-ftpserver)
+  - [4.1 Instalacion de servicio FTP](#41-instalacion-de-servicio-ftp)
+  - [4.2 Configuración FTP](#42-configuracion-ftp)
+  - [4.3 Configuración del Netplan](#43-configuracion-del-netplan)
+  - [4.4 Creación del usuario bchecker](#44-creacion-del-usuario-bchecker)
+  - [4.5 Cambiamos el host y hostname](#45-cambiamos-el-host-y-hostname)
 
 ---
 
