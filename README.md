@@ -452,6 +452,9 @@ sudo nano /etc/hostname
 Le configuramos las ip de forma estatica,comprobamos que hace ping desde el cliente ubuntu a router 
 ```bash
 isard@ubuntu:~$ ping 192.168.17.1
+```
+```bash
+isard@ubuntu:~$ ping 192.168.17.1
 PING 192.168.17.1 (192.168.17.1) 56(84) bytes of data.
 64 bytes from 192.168.17.1: icmp_seq=1 ttl=64 time=4.53 ms
 64 bytes from 192.168.17.1: icmp_seq=2 ttl=64 time=1.90 ms
@@ -459,6 +462,8 @@ PING 192.168.17.1 (192.168.17.1) 56(84) bytes of data.
 Hacemos lo mismo en el cliente windows y comprobamos que hace ping desde el cliente windows a router 
 ```bash
 C:\Windows\system32>ping 192.168.17.1
+```
+```bash
 Haciendo ping a 192.168.17.1 con 32 bytes de datos:
 Respuesta desde 192.168.17.1: bytes=32 tiempo=1ms TTL=64
 Respuesta desde 192.168.17.1: bytes=32 tiempo=2ms TTL=64
