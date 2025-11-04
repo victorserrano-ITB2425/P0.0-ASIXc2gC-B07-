@@ -453,6 +453,7 @@ Le configuramos las ip de forma estatica,comprobamos que hace ping desde el clie
 ```bash
 isard@ubuntu:~$ ping 192.168.17.1
 ```
+Resultado:
 ```bash
 isard@ubuntu:~$ ping 192.168.17.1
 PING 192.168.17.1 (192.168.17.1) 56(84) bytes of data.
@@ -463,6 +464,7 @@ Hacemos lo mismo en el cliente windows y comprobamos que hace ping desde el clie
 ```bash
 C:\Windows\system32>ping 192.168.17.1
 ```
+Resultado:
 ```bash
 Haciendo ping a 192.168.17.1 con 32 bytes de datos:
 Respuesta desde 192.168.17.1: bytes=32 tiempo=1ms TTL=64
