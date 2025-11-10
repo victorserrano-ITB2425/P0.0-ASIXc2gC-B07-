@@ -14,9 +14,9 @@
   - [1.8. Verificación del estado de mysql](#18-verificamos-el-estado-del-mysql)
   - [1.9. Securización de mysql](#19-securisamos-el-mysql-con-el-script)
   - [1.10. Proceso de creación y análisis de datos](#110-proceso-de-creación-y-análisis-de-datos)
-    - [Creación de la estructura de datos](#110-creación-de-la-estructura-de-datos)
-    - [Descarga y análisis del CSV](#extraemos-el-archivo-csv-al-servidor-para-poder-analizarlo)
-    - [Creación de la tabla equipaments](#analizamos-el-csv-y-seleccionamos-las-columnas-más-útiles-y-liamos-un-poco-los-nombres)
+    - [Creación de la estructura de datos](#creación-de-la-estructura-de-datos)
+    - [Descarga y análisis del CSV](#descarga-y-análisis-del-csv)
+    - [Creación de la tabla equipaments](#creación-de-la-tabla-equipaments)
 - [2. Documentacion de la configuracion del router](#2-documentacion-de-la-configuracion-del-router)
   - [2.1 Configuración del host y hostname](#21-configuración-del-host-y-hostname)
   - [2.2 Configuramos el Netplan](#22-configuramos-el-netplan)
@@ -329,7 +329,8 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql>
 ```
-Creamos la base de datos:
+#### Creación de la estructura de datos
+Creamos la base de datos
 ```bash
 CREATE DATABASE bcn_educacion;
 ```
@@ -338,6 +339,7 @@ Resultado:
 mysql> CREATE DATABASE bcn_educacion;
 Query OK, 1 row affected (0.01 sec)
 ```
+#### Descarga y análisis del CSV
 Extraemos el archivo csv al servidor para poder analizarlo:
 ```bash 
 lsard@B-N07:~$ wget -O equipaments.csv "https://opendata-ajuntament.barcelona.cat/data/dataset/f36b60f2-9541-4d08-b0f9-b0a9313fab3d/resource/29d9ff10-6892-4f16-9012-d5c4997857e7/download"
@@ -371,6 +373,8 @@ isard@B-N07:~$head -n 1 equipaments.csv
 isard@B-N07:~$ 
 
 ```
+#### Creación de la tabla equipaments
+
 Entramos a la base de datos para crear las tablas:
 ```bash
 USE bcn_educacion;
