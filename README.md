@@ -227,7 +227,7 @@ sudo apt install mysql-server
 ```bash
 sudo systemctl status mysql
 ```
-### Resultado esperado: 
+Resultado esperado: 
 ```
 lsard@B-N07:~$ sudo systemctl status mysql
 mysql.service - MySQL Community Server
