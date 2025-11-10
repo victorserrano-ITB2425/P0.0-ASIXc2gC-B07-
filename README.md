@@ -10,6 +10,13 @@
   - [1.4 Creación del usuario bchecker](#14-creación-del-usuario-bchecker)
   - [1.5 Configuración de SSH](#15-configuración-de-ssh)
   - [1.6 Conexión SSH desde el router](#16-conexión-ssh-desde-el-router)
+  - [1.7. Instalación del paquete mysql-server](#17-instalamos-el-paquete-de-mysql-server)
+  - [1.8. Verificación del estado de mysql](#18-verificamos-el-estado-del-mysql)
+  - [1.9. Securización de mysql](#19-securisamos-el-mysql-con-el-script)
+  - [1.10. Proceso de creación y análisis de datos](#110-proceso-de-creación-y-análisis-de-datos)
+    - [Creación de la estructura de datos](#110-creación-de-la-estructura-de-datos)
+    - [Descarga y análisis del CSV](#extraemos-el-archivo-csv-al-servidor-para-poder-analizarlo)
+    - [Creación de la tabla equipaments](#analizamos-el-csv-y-seleccionamos-las-columnas-más-útiles-y-liamos-un-poco-los-nombres)
 - [2. Documentacion de la configuracion del router](#2-documentacion-de-la-configuracion-del-router)
   - [2.1 Configuración del host y hostname](#21-configuración-del-host-y-hostname)
   - [2.2 Configuramos el Netplan](#22-configuramos-el-netplan)
@@ -299,7 +306,7 @@ Success.
 All done!
 lsard@B-N07:~$
 ```
-### 1.10 Creación de la Estructura de Datos
+### 1.10 Proceso de creación y análisis de datos
 Accede a la consola de MySQL:
 ```bash
 sudo mysql -u root -p
