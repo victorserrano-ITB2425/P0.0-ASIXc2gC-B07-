@@ -212,6 +212,196 @@ See "man sudo_root" for details.
 
 bchecker@B-N07:~$
 ```
+### 1.7 Instalamos el paquete de mysql-server:
+```bash
+sudo apt install mysql-server
+```
+### 1.8 Verificamos el estado del mysql:
+```bash
+sudo systemctl status mysql
+```
+### Resultado esperado: 
+```
+lsard@B-N07:~$ sudo systemctl status mysql
+mysql.service - MySQL Community Server
+Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: enabled)
+Active: active (running) since Tue 2025-10-28 15:29:16 CET; 40s ago
+Process: 1752 ExecStartPre=/usr/share/mysql/mysql-systemd-start pre (code=exited, status=0/SUCCESS)
+Main PID: 1779 (mysqld)
+Status: "Server is operational"
+Tasks: 38 (limit: 4554)
+Memory: 364.3M
+CPU: 1.327s
+CGroup: /system.slice/mysql.service
+        └─1779 /usr/sbin/mysqld
+
+Oct 28 15:29:15 B-N07 systemd[1]: Starting MySQL Community Server...
+Oct 28 15:29:16 B-N07 systemd[1]: Started MySQL Community Server.
+lsard@B-N07:~$ $
+```
+### 1.9 Securisamos el mysql con el script:
+Validate Password Component?: N (No). ya que la contraseña que nos piden como requisito es devil pero lo ideal sería activarla:
+```bash
+lsard@B-N07:~$ sudo mysql_secure_installation
+```
+Resultado:
+```
+lsard@B-N07:~$ sudo mysql_secure_installation
+
+Securing the MySQL server deployment.
+
+Connecting to MySQL using a blank password.
+
+VALIDATE PASSWORD COMPONENT can be used to test passwords
+and improve security. It checks the strength of password
+and allows the users to set only those passwords which are
+secure enough. Would you like to setup VALIDATE PASSWORD component?
+
+Press y|Y for Yes, any other key for No: n
+```
+Remove anonymous users?: Y (Sí) para borrar usuarios que no necesitan contraseña para acceder:
+
+```
+By default, a MySQL installation has an anonymous user,
+allowing anyone to log into MySQL without having to have
+a user account created for them. This is intended only for
+testing, and to make the installation go a bit smoother.
+You should remove them before moving into a production
+environment.
+
+Remove anonymous users? (Press y|Y for Yes, any other key for No) : y
+Success.
+
+Normally, root should only be allowed to connect from
+'localhost'. This ensures that someone cannot guess at
+the root password from the network.
+```
+Remove test database and access to it?: Y (Sí) Elimina una base de datos de prueba (test) que es un riesgo de seguridad:
+
+```
+Remove test database and access to it? (Press y|Y for Yes, any other key for No) : y
+- Dropping test database...
+Success.
+
+- Removing privileges on test database...
+Success.
+
+Reloading the privilege tables will ensure that all changes
+made so far will take effect immediately.
+```
+Reload privilege tables now?: Y (Sí). Es como "Guardar y Aplicar" todos los cambios anteriores.
+
+
+```
+Reload privilege tables now? (Press y|Y for Yes, any other key for No) : y
+Success.
+
+All done!
+lsard@B-N07:~$
+```
+### 1.10 Creación de la Estructura de Datos
+Accede a la consola de MySQL:
+```bash
+sudo mysql -u root -p
+```
+Resultado:
+```
+lsard@B-N07:~$ sudo mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor. Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.0.43-0ubuntu0.22.04.2 (Ubuntu)
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
+```
+Creamos la base de datos:
+```bash
+CREATE DATABASE bcn_educacion;
+```
+Resultado:
+```
+mysql> CREATE DATABASE bcn_educacion;
+Query OK, 1 row affected (0.01 sec)
+```
+Extraemos el archivo csv al servidor para poder analizarlo:
+```bash 
+lsard@B-N07:~$ wget -O equipaments.csv "https://opendata-ajuntament.barcelona.cat/data/dataset/f36b60f2-9541-4d08-b0f9-b0a9313fab3d/resource/29d9ff10-6892-4f16-9012-d5c4997857e7/download"
+```
+Resultado:
+```
+lsard@B-N07:~$ wget -O equipaments.csv "https://opendata-ajuntament.barcelona.cat/data/dataset/f36b60f2-9541-4d08-b0f9-b0a9313fab3d/resource/29d9ff10-6892-4f16-9012-d5c4997857e7/download"
+--2025-10-28 15:50:31--  https://opendata-ajuntament.barcelona.cat/data/dataset/f36b60f2-9541-4d08-b0f9-b0a9313fab3d/resource/29d9ff10-6892-4f16-9012-d5c4997857e7/download
+Resolviendo opendata-ajuntament.barcelona.cat (opendata-ajuntament.barcelona.cat)... 52.138.192.38
+Conectando con opendata-ajuntament.barcelona.cat (opendata-ajuntament.barcelona.cat)|52.138.192.38|:443... conectado.
+Petición HTTP enviada, esperando respuesta... 200 OK
+Longitud: 2220488 (2,1M) [text/csv]
+Guardando como: 'equipaments.csv'
+
+equipaments.csv     100%[==========================================>]  2,12M  5,45MB/s    en 0,4s
+
+2025-10-28 15:50:33 (5,45 MB/s) - 'equipaments.csv' guardado [2220488/2220488]
+
+lsard@B-N07:~$ ls -l equipaments.csv
+-rw-rw-r-- 1 lsard lsard 2220488 oct 28 15:50 equipaments.csv
+```
+Extraemos la primera fila para saber los nombres de las cabeceras:
+```bash
+head -n 1 equipaments.csv
+
+```
+Resultdo:
+```
+isard@B-N07:~$head -n 1 equipaments.csv
+��register_id,name,institution_id,institution_name,created,modified,addresses_roadtype_id,addresses_roadtype_name,addresses_road_id,addresses_road_name,addresses_start_street_number,addresses_end_street_number,addresses_neighborhood_id,addresses_neighborhood_name,addresses_district_id,addresses_district_name,addresses_zip_code,addresses_town,addresses_main_address,addresses_type,values_id,values_attribute_id,values_category,values_attribute_name,values_value,values_outstanding,values_description,secondary_filters_id,secondary_filters_name,secondary_filters_fullpath,secondary_filters_tree,secondary_filters_asia_id,geo_epgs_25831_x,geo_epgs_25831_y,geo_epgs_4326_lat,geo_epgs_4326_lon,estimated_dates,start_date,end_date,timetable
+isard@B-N07:~$ 
+
+```
+Entramos a la base de datos para crear las tablas:
+```bash
+USE bcn_educacion;
+```
+Resultado:
+```
+mysql> USE bcn_educacion;
+Database changed
+```
+Analizamos el csv y seleccionamos las columnas más útiles y liamos un poco los nombres:
+```bash
+CREATE TABLE equipaments (
+-> id INT AUTO_INCREMENT PRIMARY KEY,
+-> nom_equipament VARCHAR(255),
+-> adreca VARCHAR(255),
+-> barri VARCHAR(100),
+-> districte VARCHAR(100),
+-> codi_postal VARCHAR(10),
+-> latitud DECIMAL(10, 8),
+-> longitud DECIMAL(11, 8)
+-> );
+```
+Resultado:  
+```
+mysql> CREATE TABLE equipaments (
+-> id INT AUTO_INCREMENT PRIMARY KEY,
+-> nom_equipament VARCHAR(255),
+-> adreca VARCHAR(255),
+-> barri VARCHAR(100),
+-> districte VARCHAR(100),
+-> codi_postal VARCHAR(10),
+-> latitud DECIMAL(10, 8),
+-> longitud DECIMAL(11, 8)
+-> );
+Query OK, 0 rows affected (0.05 sec)
+mysql>
+```
+
 ## 2. Documentacion de la configuracion del router
 ### 2.1 Configuración del host y hostname
 Configuramos el archivo de hostname: 
