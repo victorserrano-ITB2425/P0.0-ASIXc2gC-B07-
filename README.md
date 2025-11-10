@@ -15,7 +15,7 @@
   - [2.2 Configuramos el Netplan](#22-configuramos-el-netplan)
   - [2.3 Configuracion del firewall](#23-Configuracion-del-firewall)
   - [2.4 Instalación del DHCP](#24-Instalación-del-DHCP)
-  - [2.5 Configuración del DHCP](#25-configuración-del-dhcp)
+  - [2.5 Configuracion del DHCP](#25-configuración-del-DHCP)
   - [2.6 Creación del usuario bchecker](#26-creacion-del-usuario-bchecker)
 - [3. Documentación de apache 2](#3-documentacion-de-apache-2)
   - [3.1 Actualización del servidor e instalación de apache](#31-Actualizacion-del-servidor-e-instalación-de-apache)
