@@ -13,7 +13,7 @@
 - [2. Documentacion de la configuracion del router](#2-documentacion-de-la-configuracion-del-router)
   - [2.1 Configuración del host y hostname](#21-configuración-del-host-y-hostname)
   - [2.2 Configuramos el Netplan](#22-configuramos-el-netplan)
-  - [2.3 Configuración del firewall](#-2.3Configuración-del-firewall)
+  - [2.3 Configuración del firewall](#23Configuración-del-firewall)
   - [2.4 Instalacion del DHCP](#24-instalacion-del-dhcp)
   - [2.5 Configuración del DHCP](#25-configuración-del-dhcp)
   - [2.6 Creación del usuario bchecker](#26-creacion-del-usuario-bchecker)
