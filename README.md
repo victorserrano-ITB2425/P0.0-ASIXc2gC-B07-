@@ -250,7 +250,7 @@ Aplicamos los cambios:
 ```bash
 sudo netplan apply
 ```
-### 2.3Configuracion del firewall
+### 2.3 Configuracion del firewall
 Configuramos el firewall para que nuestra red interna compata una unica direccion IP publica al acceder a internet
 ```bash
 sudo iptables -t nat -A POSTROUTING -o enp1s0 -j MASQUERADE
