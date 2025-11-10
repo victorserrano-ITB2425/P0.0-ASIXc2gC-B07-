@@ -24,7 +24,7 @@
   - [3.4 Cambiamos el host y hostname](#34-cambiamos-el-host-y-hostname)
 - [4. Documentación de ftpserver](#4-documentacion-de-ftpserver)
   - [4.1 Instalacion de servicio FTP](#41-instalacion-de-servicio-ftp)
-  - [4.2 Configuración FTP](#42-configuracion-ftp)
+  - [4.2 Configuración FTP](#42-Configuracion-ftp)
   - [4.3 Configuración del Netplan](#43-configuracion-del-netplan)
   - [4.4 Creación del usuario bchecker](#44-creacion-del-usuario-bchecker)
   - [4.5 Cambiamos el host y hostname](#45-cambiamos-el-host-y-hostname)
