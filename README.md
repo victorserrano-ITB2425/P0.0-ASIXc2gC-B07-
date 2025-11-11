@@ -3,6 +3,7 @@
 # P0.0 - Desplegament de la infraestructura
 
 ## Índice
+- [Topologia de la red](#topologia-de-la-red)
 - [1. Documentación del servidor de base de datos](#1-documentación-del-servidor-de-base-de-datos)
   - [1.1 Configuración del Netplan](#11-configuración-del-netplan)
   - [1.2 Configuración del hostname](#12-configuración-del-hostname)
@@ -38,7 +39,8 @@
   - [4.5 Cambiamos el host y hostname](#45-cambiamos-el-host-y-hostname)
 - [5 Configuracion de los clientes](#5-Configuracion-de-los-clientes)
 ---
-
+## Topologia de la red
+![TOPOLOGIA](https://github.com/victorserrano-ITB2425/P0.0-ASIXc2gC-B07-/blob/e635d16e8e20bb264951e443377a07ca827af339/img/TOPOLOGIA_G07.png)
 ## 1. Documentación del servidor de base de datos
 
 ### 1.1 Configuración del Netplan
