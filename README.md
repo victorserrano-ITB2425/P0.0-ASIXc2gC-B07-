@@ -24,6 +24,7 @@
   - [2.4 Instalación del DHCP](#24-Instalación-del-DHCP)
   - [2.5 Configuracion del DHCP](#25-Configuracion-del-DHCP)
   - [2.6 Creación del usuario bchecker](#26-Creación-del-usuario-bchecker)
+  - [2.7 Configuración del DNS](#27-Configuración-del-DNS)
 - [3. Documentación de apache 2](#3-documentación-de-apache-2)
   - [3.1 Actualización del servidor e instalación de apache](#31-Actualización-del-servidor-e-instalación-de-apache)
   - [3.2 Configuración del Netplan](#32-Configuración-del-netplan)
@@ -526,6 +527,14 @@ Le damos privilegios de **sudo**:
 
 ```bash
 sudo usermod -aG sudo bchecker
+```
+### 2.7 Configuración del DNS
+
+Creamos otro  usuario `bchecker` en el servidor del router con la contraseña `bchecker121` para permitir el acceso seguro mediante SSH:
+
+```bash
+sudo adduser bchecker
+sudo passwd bchecker
 ```
 
 ## 3. Documentación de apache 2
