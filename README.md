@@ -530,13 +530,14 @@ sudo usermod -aG sudo bchecker
 ```
 ### 2.7 Configuración del DNS
 
-Creamos otro  usuario `bchecker` en el servidor del router con la contraseña `bchecker121` para permitir el acceso seguro mediante SSH:
-
+Instalamos el paquete bind9 que es el encargado de que se hará de DNS, con esto resolveremos los dominios como w-n07.dmz.local etc
 ```bash
-sudo adduser bchecker
-sudo passwd bchecker
+ sudo apt install bind9 bind9utils bind9-doc -y
 ```
-
+Después de la instalación, verificamos que el servicio esté activo y corriendo sin problemas
+```bash
+ sudo systemctl status bind9.service
+```
 ## 3. Documentación de apache 2
 
 ### 3.1 Actualización del servidor e instalación de apache
@@ -554,7 +555,16 @@ sudo apt install apache2 -y
 Verificamos que esta activado
 ```bash
 sudo systemctl status apache2
-```
+named.service - BIND Domain Name Server
+  Loaded: loaded (/lib/systemd/system/named.service; enabled; vendor preset: ena
+  Active: active (running) since Tue 2025-10-28 16:25:11 CET; 39s ago
+  Docs: man:named(8)
+  Main PID: 1508 (named)
+  Tasks: 14 (limit: 4554)
+  Memory: 24.4M
+  CPU: 111ms
+  CGroup: /system.slice/named.service
+          └─1508 /usr/sbin/named -u bind
 
 ### 3.2 Configuración del Netplan
 Editamos el archivo de configuración de red:
