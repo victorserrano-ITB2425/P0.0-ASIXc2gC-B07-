@@ -613,8 +613,49 @@ Oct 28 16:38:11 R-N07 named [1639]:all zones loaded
 Oct 28 16:38:11 R-N07 named [1639]:running
 Oct 28 16:38:11 R-N07 named [1639]: Started BIND Domain Name Server.
 ```
-
-
+En esta captura dispondremos de un archivo de configuración donde definimos las zonas DNS, que lo usara y gestionará el propio DNS 
+```bash
+//
+// Do any local configuration here
+//organization
+//include "/etc/bind/zones.rfc1918";
+// Zona Forward para Intranet
+zone "intranetg07. lan" {
+    type master; 
+    file "/etc/bind/db.intranetg07.lan";
+};
+// Zona Forward para DMZ
+zone "dmzg07.lan" {
+    type master;
+    file "/etc/bind/db.dmzg07. 1an";
+};
+// Zona Reverse para Intranet (192.168.7.x)
+zone "7.168.192. in-addr.arpa" {
+    type master;
+    file "/etc/bind/db.192.168.7";
+};
+// Zona Reverse para DMZ (192.168.17.X)
+zone "17.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/db.192.168.17";
+};
+```
+Este archivo contiene los registros de cada equipo del dominio g07. Por ejemplo:
+```bash
+sudo named-checkconf
+sudo named-ckeckzone intranetg07.lan /etc/bind/db.intranetg07.lan
+Zone intranetg07.lan/IN: loaded serial 3
+OK
+sudo named-ckeckzone dmzg07.lan /etc/bind/db.dmzg07.lan
+Zone dmzg07.lan/IN: loaded serial 3
+OK
+sudo named-chekzone 7.168.192.in-addr.arpa /etc/bind/db.192.168.7
+zone 7.168.192.in-addr.arpa/IN: loaded serial 2
+OK
+sudo named-checkzone 17.168.192.in-addr.arpa /etc/bind/db.192.168.17
+zone 17.168.192.in-addr.arpa/IN: loaded serial 2
+OK
+```
 ## 3. Documentación de apache 2
 
 ### 3.1 Actualización del servidor e instalación de apache
