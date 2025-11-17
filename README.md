@@ -785,6 +785,14 @@ Creamos otro  usuario `bchecker`con la contraseña `bchecker121` para permitir e
 sudo adduser bchecker
 sudo passwd bchecker
 ```
+y creamos una carpeta con los permisos adecuados para que suba las imagenes con
+```bash
+sudo mkdir /home/bchecker/uploads
+sudo chmod 775 /home/bchecker/uploads
+sudo chown bchecker:bchecker /home/bchecker/uploads
+```
+y volvemos a reiniciar el servicio vsftpd como antes
+
 ### 4.5 Cambiamos el host y hostname
 
 Vamos a
