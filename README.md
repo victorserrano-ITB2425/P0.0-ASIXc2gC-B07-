@@ -792,6 +792,7 @@ Vamos a
 sudo nano /etc/hosts
 sudo nano /etc/hostname
 ```
+y ponemos el host F-N07
 ### 5 Configuracion de los clientes
 Le configuramos las ip de forma estatica,comprobamos que hace ping desde el cliente ubuntu a router 
 ```bash
