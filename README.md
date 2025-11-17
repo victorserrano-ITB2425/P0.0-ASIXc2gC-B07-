@@ -551,6 +551,69 @@ named.service - BIND Domain Name Server
   CGroup: /system.slice/named.service
           └─1508 /usr/sbin/named -u bind
 ```
+En esta imagen configuramos la red, del dns, con recursion yes, lo que hacemos es permitir que nuestro servidor DNS, realice las búsquedas recursivas, esto quiere decir que pregunta en otros servidores o equipos en caso de que no sea capaz de resolver
+Por otro lado en allow query le indicamos que redes están autorizadas, para realizar consultas en nuestro servidor DNS
+```bash
+options {
+        directory "/var/cache/bind";
+
+        // If there is a firewall between you and nameservers you want
+        // to talk to, you may need to fix the firewall to allow multiple
+        // ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+
+        recursion yes;
+
+        // If your ISP provided one or more IP addresses for stable
+        // nameservers, you probably want to use them as forwarders.
+        // Uncomment the following block, and insert the addresses replacing
+        // the all-0's placeholder.
+
+        allow-query { 192.168.7.0/24; 192.168.17.0/24; };
+
+        forwarders {
+                8.8.8.8;
+                8.8.4.4;
+        };
+
+        //========================================================================
+        // If BIND logs error messages about the root key being expired,
+        // you will need to update your keys.  See https://www.isc.org/bind-keys
+        //========================================================================
+        dnssec-validation no;
+
+        listen-on { 192.168.7.1; 192.168.17.1; 127.0.0.1; };
+
+        listen-on-v6 { none; };
+};
+```
+En esta captura reiniciamos y el servicio y lo verificamos, además de que ejecutamos named-checkconf para comprobar los archivos de configuración que hemos creado no tenga ningún tipo de error
+```bash
+sudo named-checkconf
+sudo systemctl restart bind9
+sudo systemctl status bind9
+named. service - BIND Domain Name Server
+  Loaded: loaded (/1ib/systemd/system/named.service; enabled; vendor preset: enabled)
+  Active: active (running) since Tue 2025-10-28 16:38:11 CET; 4min 43s ago
+  Docs: man: named (8)
+  Process: 1637 ExecStart=/usr/sbin/named OPTIONS (code=exited, status=0/SUCCESS)
+ Main PID: 1639 (named)
+    Tasks: 14 (limit: 4554)
+  Memory: 23.6M
+    CPU: 104ms
+    CGroup: /system.slice/named.service
+              -1639 /usr/sbin/named -u bind
+Oct 28 16:38:11 R-N07 named [1639]: configuring command channel from'/etc/bind/rndc.key'
+Oct 28 16:38:11 R-N07 named [1639]: command channel listening on :: 1#953
+Oct 28 16:38:11 R-N07 named [1639]: managed-keys-zone: loaded serial 2
+Oct 28 16:38:11 R-N07 named [1639]:zone localhost/IN: loaded serial 2
+Oct 28 16:38:11 R-N07 named [1639]:zone 0. in-addr.arpa/IN: loaded serial 1
+Oct 28 16:38:11 R-N07 named [1639]:zone 255.in-addr.arpa/IN: loaded serial 1
+Oct 28 16:38:11 R-N07 named [1639]:zone 127.in-addr.arpa/IN: loaded serial 1
+Oct 28 16:38:11 R-N07 named [1639]:all zones loaded
+Oct 28 16:38:11 R-N07 named [1639]:running
+Oct 28 16:38:11 R-N07 named [1639]: Started BIND Domain Name Server.
+```
+
 
 ## 3. Documentación de apache 2
 
