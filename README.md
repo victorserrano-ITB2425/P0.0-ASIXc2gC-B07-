@@ -802,7 +802,19 @@ sudo nano /etc/hostname
 ```
 y ponemos el host F-N07
 ### 5 Configuracion de los clientes
-Le configuramos las ip de forma estatica,comprobamos que hace ping desde el cliente ubuntu a router 
+Le configuramos las ip de forma estatica y le colocamos la siguiente ip 
+```bash
+ip a
+```
+```bash
+enp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 52:54:00:7d:b6:a8 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.7.14/24 brd 192.168.7.255 scope global enp3s0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5054:ff:fe7d:b6a8/64 scope link 
+       valid_lft forever preferred_lft forever
+```
+Y Comprobamos que hace ping desde el cliente ubuntu a router 
 ```bash
 isard@ubuntu:~$ ping 192.168.17.1
 ```
