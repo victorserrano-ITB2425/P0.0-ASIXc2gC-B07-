@@ -38,8 +38,10 @@
   - [4.4 Creación del usuario bchecker](#44-creación-del-usuario-bchecker)
   - [4.5 Cambiamos el host y hostname](#45-cambiamos-el-host-y-hostname)
 -  [5 Configuracion de los clientes](#5-Configuracion-de-los-clientes)
+  - [4.4 Creación del usuario bchecker](#44-creación-del-usuario-bchecker)
+  - [4.5 Cambiamos el host y hostname](#45-cambiamos-el-host-y-hostname)
   - [5.1 Linux](#51-linux)
-  -[5.2 Windows](#52-Windows)
+  - [5.2 Windows](#52-Windows)
 ---
 ## Topologia de la red
 ![TOPOLOGIA](https://github.com/victorserrano-ITB2425/P0.0-ASIXc2gC-B07-/blob/e635d16e8e20bb264951e443377a07ca827af339/img/TOPOLOGIA_G07.png)
