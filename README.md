@@ -37,8 +37,9 @@
   - [4.3 Configuración del Netplan](#43-configuración-del-netplan)
   - [4.4 Creación del usuario bchecker](#44-creación-del-usuario-bchecker)
   - [4.5 Cambiamos el host y hostname](#45-cambiamos-el-host-y-hostname)
-- [5 Configuracion del cliente Ubuntu](#5-Configuracion-del-cliente-Ubuntu)
-- [6 Configuracion del cliente Windows](#6-Configuracion-del-cliente-Windows)
+-  [5 Configuracion de los clientes](#5-Configuracion-de-los-clientes)
+  - [5.1 Linux](#51-linux)
+  - [5.2 Windows](#52-Windows)
 ---
 ## Topologia de la red
 ![TOPOLOGIA](https://github.com/victorserrano-ITB2425/P0.0-ASIXc2gC-B07-/blob/e635d16e8e20bb264951e443377a07ca827af339/img/TOPOLOGIA_G07.png)
@@ -802,7 +803,8 @@ sudo nano /etc/hosts
 sudo nano /etc/hostname
 ```
 y ponemos el host F-N07
-### 5 Configuracion del cliente Ubuntu
+### 5 Configuracion de los clientes
+### 5.1 Linux
 Le configuramos las ip de forma estatica y le colocamos la siguiente ip 
 ```bash
 ip a
@@ -826,7 +828,7 @@ PING 192.168.17.1 (192.168.17.1) 56(84) bytes of data.
 64 bytes from 192.168.17.1: icmp_seq=1 ttl=64 time=4.53 ms
 64 bytes from 192.168.17.1: icmp_seq=2 ttl=64 time=1.90 ms
 ```
-### 6 Configuracion del cliente Windows
+### 5.2 Windows
 Cambiamos la ip de forma estatica y colocamos la siguiente:
 ```bash
 ipconfig /all
