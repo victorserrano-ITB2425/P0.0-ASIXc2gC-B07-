@@ -38,6 +38,7 @@
   - [4.4 Creación del usuario bchecker](#44-creación-del-usuario-bchecker)
   - [4.5 Cambiamos el host y hostname](#45-cambiamos-el-host-y-hostname)
 - [5 Configuracion del cliente Ubuntu](#5-Configuracion-del-cliente-Ubuntu)
+- [6 Configuracion del cliente Windows](#6-Configuracion-del-cliente-Windows)
 ---
 ## Topologia de la red
 ![TOPOLOGIA](https://github.com/victorserrano-ITB2425/P0.0-ASIXc2gC-B07-/blob/e635d16e8e20bb264951e443377a07ca827af339/img/TOPOLOGIA_G07.png)
@@ -825,21 +826,59 @@ PING 192.168.17.1 (192.168.17.1) 56(84) bytes of data.
 64 bytes from 192.168.17.1: icmp_seq=1 ttl=64 time=4.53 ms
 64 bytes from 192.168.17.1: icmp_seq=2 ttl=64 time=1.90 ms
 ```
-Hacemos lo mismo en el cliente windows y comprobamos que hace ping desde el cliente windows a router 
+### 6 Configuracion del cliente Windows
+Cambiamos la ip de forma estatica y colocamos la siguiente:
 ```bash
-C:\Windows\system32>ping 192.168.17.1
+ipconfig /all
 ```
-Resultado:
 ```bash
-Haciendo ping a 192.168.17.1 con 32 bytes de datos:
-Respuesta desde 192.168.17.1: bytes=32 tiempo=1ms TTL=64
-Respuesta desde 192.168.17.1: bytes=32 tiempo=2ms TTL=64
-Respuesta desde 192.168.17.1: bytes=32 tiempo=1ms TTL=64
-Respuesta desde 192.168.17.1: bytes=32 tiempo=1ms TTL=64
+adaptador de Ethernet Ethernet:
+Sufijo DNS específico para la conexión....:
+Descripcion...............................:Red Hat VirtIO Ethernet Adapter #3
+Dirección física...........................:52-54-00-48-1A-04
+DHCP habilitado............................:no
+Configuración automática habilitada........:si
+Dirección IPv4.............................:192.168.7.69(Preferido)
+Máscara de subred .........................:255.255.255.0
+Puerta de enlace predeterminada:...........:192.168.7.1
+Servidores DNS.............................:192.168.7.1
+NetBIOS sobre TCP/IP.......................:habilitado
+```
+Aqui tendremos las distintas comprobaciones, con el comando nslookup tanto la del Web y la del FTP por otro lado tenemos los ping de cada uno de los servidores
+```bash
+C:\Windows\system32> nslookup
+```
+Resultado de la comprobaciones:
+```bash
+servidores
+PS C: \WINDOWS\system32> nslookup W-N07.dmzg07.1lan
+Servidor:R-N07.intranetg07.lan
+Address: 192.168.7.1
+Nombre: W-N07.dmzg07.lan
+Address: 192.168.17.11
 
-Estadísticas de ping para 192.168.17.1:
-    Paquetes: enviados = 4, recibidos = 4, perdidos = 0
+PS C: \WINDOWS\system32> nslookup F-N07.dmzg07.lan
+Servidor: R-N07.intranetg07.lan
+Address: 192.168.7.1
+Nombre:F-N07.dmzg07.lan
+Address: 192.168.17.12
+
+PS C: \WINDOWS\system32> PING F-N07.dmzg07.lan
+Haciendo ping a F-N07.dmzg07.lan [192.168.17.12] con 32 bytes de datos:
+Respuesta desde 192.168.17.12: bytes=32 tiempo=2ms TTL=63
+Respuesta desde 192.168.17.12: bytes=32 tiempo=1ms TTL=63
+Estadísticas de ping para 192.168.17.12:
+    Paquetes: enviados = 2, recibidos = 2, perdidos = 0
     (0% perdidos),
+Tiempos aproximados de ida y vuelta en milisegundos:
+    Mínimo = 1ms, Máximo = 2ms, Media = 1ms
+
+PS C: \WINDOWS\system32> ping F-N07.dmzg07.lan
+Haciendo ping a F-N07.dmzg07.lan [192.168.17.12] con 32 bytes de datos:
+Respuesta desde 192.168.17.12: bytes=32 tiempo=2ms TTL=63
+Respuesta desde 192.168.17.12: bytes=32 tiempo=1ms TTL=63
+Estadísticas de ping para 192.168.17.12:
+Paquetes: enviados = 2, recibidos = 2, perdidos = 0
 Tiempos aproximados de ida y vuelta en milisegundos:
     Mínimo = 1ms, Máximo = 2ms, Media = 1ms
 ```
