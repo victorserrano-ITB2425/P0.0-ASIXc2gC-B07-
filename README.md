@@ -38,7 +38,6 @@
   - [4.4 Creación del usuario bchecker](#44-creación-del-usuario-bchecker)
   - [4.5 Cambiamos el host y hostname](#45-cambiamos-el-host-y-hostname)
 -  [5 Configuracion de los clientes](#5-Configuracion-de-los-clientes)
-  - [4.5 Cambiamos el host y hostname](#45-cambiamos-el-host-y-hostname)
   - [5.1 Linux](#51-linux)
   - [5.2 Windows](#52-Windows)
 ---
