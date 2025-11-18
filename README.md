@@ -37,7 +37,7 @@
   - [4.3 Configuración del Netplan](#43-configuración-del-netplan)
   - [4.4 Creación del usuario bchecker](#44-creación-del-usuario-bchecker)
   - [4.5 Cambiamos el host y hostname](#45-cambiamos-el-host-y-hostname)
-- [5 Configuracion de los clientes](#5-Configuracion-de-los-clientes)
+- [5 Configuracion del cliente Ubuntu](#5-Configuracion-del-cliente-Ubuntu)
 ---
 ## Topologia de la red
 ![TOPOLOGIA](https://github.com/victorserrano-ITB2425/P0.0-ASIXc2gC-B07-/blob/e635d16e8e20bb264951e443377a07ca827af339/img/TOPOLOGIA_G07.png)
@@ -801,7 +801,7 @@ sudo nano /etc/hosts
 sudo nano /etc/hostname
 ```
 y ponemos el host F-N07
-### 5 Configuracion de los clientes
+### 5 Configuracion del cliente Ubuntu
 Le configuramos las ip de forma estatica y le colocamos la siguiente ip 
 ```bash
 ip a
