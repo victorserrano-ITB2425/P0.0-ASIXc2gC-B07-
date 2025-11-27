@@ -18,6 +18,7 @@
     - [Creación de la estructura de datos](#creación-de-la-estructura-de-datos)
     - [Descarga y análisis del CSV](#descarga-y-análisis-del-csv)
     - [Creación de la tabla equipaments](#creación-de-la-tabla-equipaments)
+  - (#1.11. Creación de usuario de aplicación y seguridad)[Creación-de-usuario-de-aplicación-y-seguridad] 
 - [2. Documentacion de la configuracion del router](#2-documentacion-de-la-configuracion-del-router)
   - [2.1 Configuración del host y hostname](#21-configuración-del-host-y-hostname)
   - [2.2 Configuramos el Netplan](#22-configuramos-el-netplan)
@@ -415,6 +416,180 @@ mysql> CREATE TABLE equipaments (
 -> longitud DECIMAL(11, 8)
 -> );
 Query OK, 0 rows affected (0.05 sec)
+mysql>
+```
+Preparación y Carga de Datos (ETL)
+
+Movemos el archivo CSV a la carpeta segura de MySQL:
+```bash
+sudo cp equipaments.csv /var/lib/mysql-files/equipaments.csv
+```
+Ajustamos la codificación a UTF-8:
+```bash
+sudo iconv -f UTF-16LE -t UTF-8 /var/lib/mysql-files/equipaments.csv -o /var/lib/mysql-files/equipaments_utf8.csv
+```
+Creamos el script limpiar_datos.py  para procesar el CSV y formatear los nulos:
+```bash
+sudo nano limpiar_datos.py && sudo chmod +x limpiar_datos.py 
+```
+
+```bash
+import csv
+
+input_file = '/var/lib/mysql-files/equipaments_utf8.csv'
+output_file = '/var/lib/mysql-files/equipaments_final.csv'
+
+with open(input_file, 'r', encoding='utf-8') as fin, \
+     open(output_file, 'w', encoding='utf-8', newline='') as fout:
+    
+    reader = csv.reader(fin)
+    writer = csv.writer(fout, lineterminator='\n')
+    
+    next(reader) # Salta cabecera
+    
+    for row in reader:
+        try:
+            nombre = row[1]
+            direccion = row[9] + " " + row[10]
+            barri = row[13]
+            districte = row[16]
+            cp = row[15]
+            lat = row[34] if row[34] else '\\N'
+            lon = row[35] if row[35] else '\\N'
+            
+            writer.writerow([nombre, direccion, barri, districte, cp, lat, lon])
+        except IndexError:
+            continue
+
+print("Archivo limpio creado: equipaments_final.csv")
+```
+Ejecutamos el script:
+```bash
+sudo python3 limpiar_datos.py
+```
+Podemos ver el resultado para comprobar que el texto esta limpio:
+```bash
+sudo cat /var/lib/mysql-files/equipaments_final.csv
+```
+'''
+isard@B-N07:~$ sudo cat /var/lib/mysql-files/equipaments_final.csv
+Escola Bou Centelles,LluIl 198,el Poblenou,Sant Marti,08005,41.401178206266216,2.202556982064
+0296
+Autoescola Canyelles *Antonio Machado,Antonio Machado 16,Canyelles,Nou Barris,08042,41.443458
+12450906,2.168307205987914
+Escola de Música Farré,C Santa Caterina 33,Sants,Sants-Montjuic,08014,41.37927459385171,2.136
+181343415099
+Escola Professional de Pràctica Jurídica,Mallorca 283,la Dreta de l'Eixample,Eixample,08037,4
+1.39565882210395,2.164768994816127
+Llar d'Infants Dintell,Balmes 251,Sant Gervasi - Galvany,Sarrià-Sant Gervasi,08006,41.3998672
+71542966,2.1493835109212776
+Escola Bressol Municipal Cadí,Carrer de l'Om 11,el Raval,Ciutat Vella,08001,41.37613418778239
+,2.1726426208041967
+Escola Bressol Municipal Cadí,Carrer de l'Om 11,el Raval,Ciutat Vella,08001,41.37613418778239
+,2.1726426208041967
+Institut d'Estudis Catalans,C Carme 47,el Raval,Ciutat Vella,08001,41.38152411821448,2.168974
+973139409
+Escola Massana Centre Municipal d'Art i Disseny,Plaça de la Gardunya 9,el Raval,Ciutat Vella,
+08001,41.380953983657726,2.1700553338176225
+Facultat de Nàutica - UPC,Pla Palau 18,la Barceloneta,Ciutat Vella,08003,41.38243904810675,2.
+184497630278131
+Autoescola Pallars *Rambla Brasil,Rbla Brasil 1,Sants - Badal,Sants-Montjuïc,08028,41.3757903
+'''
+
+Entramos a la base de datos y argamos los datos en MySQL:
+```bash
+sudo mysql -u root -p
+```
+
+Ejecutamos:
+```bash
+LOAD DATA INFILE '/var/lib/mysql-files/equipaments_final.csv'
+INTO TABLE equipaments
+CHARACTER SET utf8mb4
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+(nom_equipament, adreca, barri, districte, codi_postal, latitud, longitud);
+```
+Comprobamos el contenido de las tablas:
+
+```bash
+SELECT * FROM equipaments LIMIT 5;
+```
+```
+mysql> SELECT * FROM equipaments LIMIT 5;
++----+---------------------------------------+--------------------+-----------------------+
+| id | nom_equipament                        | adreca             | barri                 
+     | districte          | codi_postal | latitud    | longitud   |
++----+---------------------------------------+--------------------+-----------------------+
+|  1 | Escola Bou Centelles                  | Llull 198          | el Poblenou           
+     | Sant Martí         | 08005       | 41.40117821 | 2.20255698 |
+|  2 | Autoescola Canyelles *Antonio Machado | Antonio Machado 16 | Canyelles             
+     | Nou Barris         | 08042       | 41.44345812 | 2.16830721 |
+|  3 | Escola de Música Farré                | C Santa Caterina 33| Sants                 
+     | Sants-Montjuïc     | 08014       | 41.37927459 | 2.13618134 |
+|  4 | Escola Professional de Pràctica Jurídica     | Mallorca 283       | la Dreta de l'Eixam
+ple  | Eixample           | 08037       | 41.39565882 | 2.16476899 |
+|  5 | Llar d'Infants Dintell                | Balmes 251         | Sant Gervasi - Galv   
+any  | Sarrià-Sant Gervasi| 08006       | 41.39986727 | 2.14938351 |
++----+---------------------------------------+--------------------+-----------------------+
+5 rows in set (0.00 sec)
+```
+
+### 1.11 Creación de usuario de aplicación y seguridad
+Modificamos el archivo /etc/mysql/mysql.conf.d/mysqld.cnf para permitir conexiones externas:
+```bash
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+Modificamos la linea bind-address colocando la red 0.0.0.0 para indicarle a la web que reciba las llamadas de cualquier red, mas adelante configuraremos una regla en el firewall para que no sea inseguro:
+```bash
+bind-address = 0.0.0.0
+```
+Reiniciamos el servicio MySQL:
+```bash
+sudo systemctl restart mysql &&  sudo systemctl status mysql
+```
+Entramos a la Base De Datos y creamos el usuario específico para la aplicación web con restricción de IP:
+```bash
+sudo mysql -u root -p
+```
+```bash
+CREATE USER 'app_bcn'@'192.168.17.11' IDENTIFIED BY 'pirineus';
+GRANT SELECT, INSERT, UPDATE, DELETE ON bcn_educacion.* TO 'app_bcn'@'192.168.17.11';
+FLUSH PRIVILEGES;
+```
+Configuramos el Firewall (UFW) para proteger el puerto 3306:
+```bash
+sudo apt install ufw -y
+sudo ufw allow from 192.168.17.11 to any port 3306 proto tcp
+sudo ufw allow ssh
+sudo ufw enable
+
+```
+Comprobamos el estado:
+```bash
+sudo ufw status
+```
+Comprovamos el funcionamiento desde el servidor WEB:
+```bash
+mysql -u app_bcn -p -h 192.168.7.11
+```
+Resultado:
+```
+isard@W-N07:~$ mysql -u app_bcn -p -h 192.168.7.11
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.43-0ubuntu0.22.04.2 (Ubuntu)
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
 mysql>
 ```
 
