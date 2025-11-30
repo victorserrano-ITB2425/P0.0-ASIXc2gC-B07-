@@ -32,6 +32,7 @@
   - [3.2 Configuración del Netplan](#32-Configuración-del-netplan)
   - [3.3 Creación del usuario bchecker](#33-creacion-del-usuario-bchecker)
   - [3.4 Cambiamos el host y hostname](#34-cambiamos-el-host-y-hostname)
+  - [3.5 Configuración html, php, js y css](#35-configuración-html,-php,-js-y-css)
 - [4. Documentación de ftpserver](#4-documentación-de-ftpserver)
   - [4.1 Instalacion de servicio FTP](#41-instalación-de-servicio-ftp)
   - [4.2 Configuración FTP](#42-Configuración-ftp)
@@ -895,6 +896,16 @@ sudo nano /etc/hosts
 sudo nano /etc/hostname
 ```
 y ahi cambiamos el nombre de ubuntu por W-N07
+
+###3.5 Configuración html, php, js y css
+
+Pondremos todos los archivos necesarios para la pagina web en /var/www/html/mi_sitio/public_html
+
+<img width="558" height="48" alt="image" src="https://github.com/user-attachments/assets/c942f768-d84b-4d52-ae44-49b9f4d33df3" />
+
+En index.html tendremos la pagina principal, a la cual accederemos con la IP 192.168.17.11 y mediante un boton accederemos a taula.php para ver la tabla que esta en el servidor BBDD
+
+El estilo de las paginas y los botones estan hechos con el css y el js respectivamente.
 
 ## 4. Documentación de ftpserver
 
