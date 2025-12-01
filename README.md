@@ -1016,7 +1016,19 @@ PING 192.168.17.1 (192.168.17.1) 56(84) bytes of data.
 ```
 Podemos ver que desde el cliente ubuntu podemos ingresar a la pagina web de la Base de datos
 <img width="1869" height="983" alt="Captura de pantalla de 2025-12-01 16-33-06" src="https://github.com/user-attachments/assets/838d50a4-5581-454c-b9eb-112a2f6b971a" />
-
+Podemos ver la conexión  del cliente ubuntu por ftp al servidor web 
+```bash
+isard@ubuntu:~$ ftp 192.168.17.12
+Connected to 192.168.17.12.
+220 (vsFTPd 3.0.5)
+Name (192.168.17.12:isard): bchecker
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp> lls
+```
 ### 5.2 Windows
 Cambiamos la ip de forma estatica y colocamos la siguiente:
 ```bash
@@ -1037,7 +1049,6 @@ NetBIOS sobre TCP/IP.......................:habilitado
 ```
 Aqui tendremos las distintas comprobaciones, con el comando nslookup tanto la del Web y la del FTP por otro lado tenemos los ping de cada uno de los servidores
 ```bash
-
 C:\Windows\system32> nslookup
 ```
 Resultado de la comprobaciones:
