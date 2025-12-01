@@ -1014,6 +1014,7 @@ PING 192.168.17.1 (192.168.17.1) 56(84) bytes of data.
 64 bytes from 192.168.17.1: icmp_seq=1 ttl=64 time=4.53 ms
 64 bytes from 192.168.17.1: icmp_seq=2 ttl=64 time=1.90 ms
 ```
+Podemos ver que desde el cliente ubuntu podemos ingresar a la pagina web de la Base de datos
 ### 5.2 Windows
 Cambiamos la ip de forma estatica y colocamos la siguiente:
 ```bash
@@ -1034,6 +1035,7 @@ NetBIOS sobre TCP/IP.......................:habilitado
 ```
 Aqui tendremos las distintas comprobaciones, con el comando nslookup tanto la del Web y la del FTP por otro lado tenemos los ping de cada uno de los servidores
 ```bash
+
 C:\Windows\system32> nslookup
 ```
 Resultado de la comprobaciones:
@@ -1070,6 +1072,8 @@ Paquetes: enviados = 2, recibidos = 2, perdidos = 0
 Tiempos aproximados de ida y vuelta en milisegundos:
     Mínimo = 1ms, Máximo = 2ms, Media = 1ms
 ```
+Podemos ver que desde el cliente ubuntu podemos ingresar a la pagina web de la Base de datos
+
 
 
 
