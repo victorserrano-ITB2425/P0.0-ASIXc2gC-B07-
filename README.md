@@ -1074,7 +1074,7 @@ Paquetes: enviados = 2, recibidos = 2, perdidos = 0
 Tiempos aproximados de ida y vuelta en milisegundos:
     Mínimo = 1ms, Máximo = 2ms, Media = 1ms
 ```
-Podemos ver que desde el cliente Windows podemos ingresar a la pagina web de la Base de Datos
+Tambien podemos  ver que desde el cliente Windows podemos ingresar a la pagina web de la Base de Datos
 <img width="712" height="382" alt="image" src="https://github.com/user-attachments/assets/3e287843-9dac-4bf7-92b5-c1284dd509f8" />
 
 
