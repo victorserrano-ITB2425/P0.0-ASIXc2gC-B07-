@@ -848,9 +848,9 @@ Instalamos el servicio de apache
 sudo apt install apache2 -y
 ```
 
-Verificamos que esta activado
-```bash
 ### 3.2 Configuración del Netplan
+
+
 Editamos el archivo de configuración de red:
 ```bash
 sudo nano /etc/netplan/00-installer-config.yaml
@@ -897,7 +897,7 @@ sudo nano /etc/hostname
 ```
 y ahi cambiamos el nombre de ubuntu por W-N07
 
-###3.5 Configuración html, php, js y css
+### 3.5 Configuración html, php, js y css
 
 Pondremos todos los archivos necesarios para la pagina web en /var/www/html/mi_sitio/public_html
 
