@@ -1015,6 +1015,8 @@ PING 192.168.17.1 (192.168.17.1) 56(84) bytes of data.
 64 bytes from 192.168.17.1: icmp_seq=2 ttl=64 time=1.90 ms
 ```
 Podemos ver que desde el cliente ubuntu podemos ingresar a la pagina web de la Base de datos
+<img width="1869" height="983" alt="Captura de pantalla de 2025-12-01 16-33-06" src="https://github.com/user-attachments/assets/838d50a4-5581-454c-b9eb-112a2f6b971a" />
+
 ### 5.2 Windows
 Cambiamos la ip de forma estatica y colocamos la siguiente:
 ```bash
@@ -1072,7 +1074,7 @@ Paquetes: enviados = 2, recibidos = 2, perdidos = 0
 Tiempos aproximados de ida y vuelta en milisegundos:
     Mínimo = 1ms, Máximo = 2ms, Media = 1ms
 ```
-Podemos ver que desde el cliente ubuntu podemos ingresar a la pagina web de la Base de datos
+Podemos ver que desde el cliente Windows podemos ingresar a la pagina web de la Base de Datos
 <img width="712" height="382" alt="image" src="https://github.com/user-attachments/assets/3e287843-9dac-4bf7-92b5-c1284dd509f8" />
 
 
